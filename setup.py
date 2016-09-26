@@ -9,6 +9,12 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
+
+def get_version():
+    d = {}
+    execfile('./litter_getter/__init__.py', d)
+    return d['__version__']
+
 requirements = [
     'requests',
     'RISparser>=0.4.1',
@@ -16,12 +22,12 @@ requirements = [
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
+    'pytest',
 ]
 
 setup(
     name='litter_getter',
-    version='0.1.0',
+    version=get_version(),
     description="Retrieve literature from biomedical reference libraries such as PubMed, EPA's HERO, and imports from Endnote RIS exports",
     long_description=readme + '\n\n' + history,
     author="Andy Shapiro",
