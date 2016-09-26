@@ -12,12 +12,8 @@ Literature Getter (litter_getter)
         :target: https://litter-getter.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/shapiromatron/litter_getter/shield.svg
-     :target: https://pyup.io/repos/github/shapiromatron/litter_getter/
-     :alt: Updates
 
-
-Retrieve literature from biomedical reference libraries such as PubMed, EPA's HERO, and imports from Endnote RIS exports
+Retrieve literature from biomedical reference libraries such as PubMed, EPA's HERO, and imports from Endnote RIS exports.
 
 
 * Free software: MIT license
@@ -27,13 +23,18 @@ Retrieve literature from biomedical reference libraries such as PubMed, EPA's HE
 Features
 --------
 
-* TODO
+* Search and reference parsing using `PubMed`_ API
+* Search and reference parsing using `US EPA HERO`_ API
+* Endnote/Reference Manager RIS file-export parsing
+
 
 Credits
 ---------
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
+.. _PubMed: http://www.ncbi.nlm.nih.gov/pubmed
+.. _`US EPA HERO`: https://hero.epa.gov/hero/
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
 
