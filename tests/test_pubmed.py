@@ -40,7 +40,7 @@ class PubMedSearchTests(TestCase):
         self.search = PubMedSearch(term=self.term)
         self.search.get_ids_count()
         self.search.get_ids()
-        self.assertTrue(self.search.ids >= 212)
+        self.assertTrue(len(self.search.ids) >= 212)
 
     def _results_check(self):
         self.assertEqual(self.search.id_count, 6)
