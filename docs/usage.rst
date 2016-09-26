@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use get_litter in a project::
+To use litter_getter in a project::
 
-    import get_litter
+    import litter_getter

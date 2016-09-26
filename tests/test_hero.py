@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from get_litter.hero import HEROFetch
+from litter_getter.hero import HEROFetch
 
 from unittest import TestCase
 
@@ -43,6 +43,6 @@ class HEROFetchTests(TestCase):
         self.assertEqual(len(hero_getter.content), 195)
         self.assertEqual(len(hero_getter.failures), 10)
         self.assertListEqual(
-            hero_getter.failures,
-            ['1227', '1349', '1224', '1303', '1205',
-             '1289', '1228', '1366', '1373', '1361'])
+            sorted(hero_getter.failures),
+            sorted(['1227', '1349', '1224', '1303', '1205',
+                    '1289', '1228', '1366', '1373', '1361']))

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from get_litter.utils import get_author_short_text
+from litter_getter.utils import get_author_short_text
 
 from unittest import TestCase
 

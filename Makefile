@@ -48,26 +48,26 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 
 lint: ## check style with flake8
-	flake8 get_litter tests
+	flake8 litter_getter tests
 
 test: ## run tests quickly with the default Python
 	py.test
-	
+
 
 test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source get_litter py.test
-	
+	coverage run --source litter_getter py.test
+
 		coverage report -m
 		coverage html
 		$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/get_litter.rst
+	rm -f docs/litter_getter.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ get_litter
+	sphinx-apidoc -o docs/ litter_getter
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html

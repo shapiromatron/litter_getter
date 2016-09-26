@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from get_litter.pubmed import PubMedSearch, PubMedFetch
+from litter_getter.pubmed import PubMedSearch, PubMedFetch
 
 from unittest import TestCase
 

@@ -1,4 +1,4 @@
-* get_litter version:
+* litter_getter version:
 * Python version:
 * Operating System:
 

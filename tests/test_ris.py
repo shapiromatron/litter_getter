@@ -4,7 +4,7 @@
 import json
 import os
 
-from get_litter.ris import RisImporter
+from litter_getter.ris import RisImporter
 
 from .utils import ExtendedTestCase
 

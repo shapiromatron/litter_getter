@@ -20,22 +20,22 @@ test_requirements = [
 ]
 
 setup(
-    name='get_litter',
+    name='litter_getter',
     version='0.1.0',
     description="Retrieve literature from biomedical reference libraries such as PubMed, EPA's HERO, and imports from Endnote RIS exports",
     long_description=readme + '\n\n' + history,
     author="Andy Shapiro",
     author_email='shapiromatron@gmail.com',
-    url='https://github.com/shapiromatron/get_litter',
+    url='https://github.com/shapiromatron/litter_getter',
     packages=[
-        'get_litter',
+        'litter_getter',
     ],
-    package_dir={'get_litter': 'get_litter'},
+    package_dir={'litter_getter': 'litter_getter'},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='get_litter',
+    keywords='litter_getter',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

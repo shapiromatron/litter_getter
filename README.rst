@@ -1,20 +1,19 @@
-===============================
-get_litter
-===============================
+=================================
+Literature Getter (litter_getter)
+=================================
 
+.. image:: https://img.shields.io/pypi/v/litter_getter.svg
+        :target: https://pypi.python.org/pypi/litter_getter
 
-.. image:: https://img.shields.io/pypi/v/get_litter.svg
-        :target: https://pypi.python.org/pypi/get_litter
+.. image:: https://img.shields.io/travis/shapiromatron/litter_getter.svg
+        :target: https://travis-ci.org/shapiromatron/litter_getter
 
-.. image:: https://img.shields.io/travis/shapiromatron/get_litter.svg
-        :target: https://travis-ci.org/shapiromatron/get_litter
-
-.. image:: https://readthedocs.org/projects/get-litter/badge/?version=latest
-        :target: https://get-litter.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/litter-getter/badge/?version=latest
+        :target: https://litter-getter.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/shapiromatron/get_litter/shield.svg
-     :target: https://pyup.io/repos/github/shapiromatron/get_litter/
+.. image:: https://pyup.io/repos/github/shapiromatron/litter_getter/shield.svg
+     :target: https://pyup.io/repos/github/shapiromatron/litter_getter/
      :alt: Updates
 
 
@@ -22,7 +21,7 @@ Retrieve literature from biomedical reference libraries such as PubMed, EPA's HE
 
 
 * Free software: MIT license
-* Documentation: https://get-litter.readthedocs.io.
+* Documentation: https://litter-getter.readthedocs.io.
 
 
 Features
