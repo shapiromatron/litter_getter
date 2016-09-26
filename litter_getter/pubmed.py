@@ -3,34 +3,58 @@ from itertools import chain
 import logging
 import xml.etree.ElementTree as ET
 import re
+import sys
 
 import requests
 
 from . import utils
 
 
-"""
-PubMed API:
-https://www.ncbi.nlm.nih.gov/books/NBK25499/
+class PubMedSettings(object):
+    """Module-level settings to check that PubMed requests registered."""
 
-"""
-THIS_TOOL = 'HAWC'
-THIS_EMAIL = 'andy.shapiro@nih.gov'
+    placeholder = 'PLACEHOLDER'
+
+    def __init__(self):
+        self.tool = self.placeholder
+        self.email = self.placeholder
 
 
-class PubMedSearch(object):
+def connect(tool, email):
+    """Register the tool and email being used for querying PubMed."""
+    settings = getattr(module, 'settings')
+    settings.tool = tool
+    settings.email = email
+
+
+# upload load, instantiate a settings file
+module = sys.modules[__name__]
+setattr(module, 'settings', PubMedSettings())
+
+
+class PubMedUtility(object):
+    """Register tools with this utility class to import PubMed settings."""
+
+    def _register_instance(self):
+        settings = getattr(module, 'settings')
+        if PubMedSettings.placeholder in [settings.tool, settings.email]:
+            raise ValueError('Improper settings; `pubmed.connect()` method to register your tool.')
+        self.settings['tool'] = settings.tool
+        self.settings['email'] = settings.email
+
+
+class PubMedSearch(PubMedUtility):
     """Search PubMed with search-term and return a complete list of PubMed IDs."""
 
     base_url = r'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi'
     default_settings = dict(
         retmax=5000,
         db='pubmed',
-        tool=THIS_TOOL,
-        email=THIS_EMAIL,
     )
 
     def __init__(self, term, **kwargs):
         self.settings = PubMedSearch.default_settings.copy()
+        self._register_instance()
         self.settings['term'] = term
         for k, v in kwargs.iteritems():
             self.settings[k] = v
@@ -87,17 +111,15 @@ class PubMedSearch(object):
         }
 
 
-class PubMedFetch(object):
+class PubMedFetch(PubMedUtility):
     """Given a list of PubMed IDs, return list of dict of PubMed citation."""
 
     base_url = r'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'
-    default_settings = {
-        'retmax': 1000,
-        'db': 'pubmed',
-        'retmode': 'xml',
-        'tool': THIS_TOOL,
-        'email': THIS_EMAIL,
-    }
+    default_settings = dict(
+        retmax=1000,
+        db='pubmed',
+        retmode='xml',
+    )
 
     ARTICLE = 0
     BOOK = 1
@@ -114,6 +136,7 @@ class PubMedFetch(object):
         self.ids = id_list
         self.content = []
         self.settings = PubMedFetch.default_settings.copy()
+        self._register_instance()
         for k, v in kwargs.iteritems():
             self.settings[k] = v
 
