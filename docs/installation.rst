@@ -12,7 +12,7 @@ To install litter_getter, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install litter_getter
+    pip install litter_getter
 
 This is the preferred method to install litter_getter, as it will always install the most recent stable release.
 
@@ -23,29 +23,22 @@ you through the process.
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
 
 
-From sources
-------------
+Development version
+-------------------
 
-The sources for litter_getter can be downloaded from the `Github repo`_.
-
-You can either clone the public repository:
+Clone from the `Github repository`_:
 
 .. code-block:: console
 
-    $ git clone git://github.com/shapiromatron/litter_getter
+    git clone git://github.com/shapiromatron/litter_getter
 
-Or download the `tarball`_:
-
-.. code-block:: console
-
-    $ curl  -OL https://github.com/shapiromatron/litter_getter/tarball/master
-
-Once you have a copy of the source, you can install it with:
+Once you have a copy of the source, install with:
 
 .. code-block:: console
 
-    $ python setup.py install
+    cd litter_getter/
+    pip install -e .
+    pip install -r requirements_dev.txt
+    make test
 
-
-.. _Github repo: https://github.com/shapiromatron/litter_getter
-.. _tarball: https://github.com/shapiromatron/litter_getter/tarball/master
+.. _`Github repository`: https://github.com/shapiromatron/litter_getter

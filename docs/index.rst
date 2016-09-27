@@ -1,9 +1,4 @@
-.. litter_getter documentation master file, created by
-   sphinx-quickstart on Tue Jul  9 22:26:36 2013.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to litter_getter's documentation!
+Welcome to Litter Getter's documentation!
 ======================================
 
 Contents:
@@ -14,8 +9,14 @@ Contents:
    readme
    installation
    usage
-   contributing
    history
+
+API:
+
+.. toctree::
+   :maxdepth: 3
+
+   litter_getter
 
 Indices and tables
 ==================
