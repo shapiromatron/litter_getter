@@ -5,7 +5,7 @@ Literature Getter (litter_getter)
 .. image:: https://img.shields.io/pypi/v/litter_getter.svg
         :target: https://pypi.python.org/pypi/litter_getter
 
-.. image:: https://pypip.in/wheel/litter_getter/badge.svg
+.. image:: https://img.shields.io/pypi/wheel/litter_getter.svg
     :target: https://pypi.python.org/pypi/litter_getter/
     :alt: Wheel Status
 
