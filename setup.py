@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import re
 from setuptools import setup
 
 with open('README.rst') as readme_file:
@@ -11,9 +12,11 @@ with open('HISTORY.rst') as history_file:
 
 
 def get_version():
-    d = {}
-    execfile('./litter_getter/__init__.py', d)
-    return d['__version__']
+    regex = r"""^__version__ = '(.*)'$"""
+    with open('litter_getter/__init__.py', 'r') as f:
+        text = f.read()
+    return re.findall(regex, text, re.MULTILINE)[0]
+
 
 requirements = [
     'requests',
