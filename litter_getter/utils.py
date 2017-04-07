@@ -14,3 +14,10 @@ def get_author_short_text(authors):
         return u'{0}, {1}, and {2}'.format(*authors)
     else:  # >3 authors
         return u'{0} et al.'.format(authors[0])
+
+
+def try_int(val):
+    try:
+        return int(val)
+    except:
+        return val
