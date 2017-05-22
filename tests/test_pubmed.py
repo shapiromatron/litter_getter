@@ -88,7 +88,7 @@ class PubMedFetchTests(TestCase):
         self.fetch = pubmed.PubMedFetch(id_list=self.ids)
         self.fetch.get_content()
         # assert that a unicode value exists in text
-        self.assertTrue(self.fetch.content[0]['abstract'].find(u'\u03b1') > -1)
+        self.assertTrue(self.fetch.content[0]['abstract'].find('\u03b1') > -1)
 
     def test_collective_author(self):
         # this doesn't have an individual author but rather a collective author
@@ -97,7 +97,7 @@ class PubMedFetchTests(TestCase):
         self.fetch.get_content()
         self.assertEqual(
             self.fetch.content[0]['authors_short'],
-            u'National Toxicology Program'
+            'National Toxicology Program'
         )
 
     def test_structured_abstract(self):
@@ -109,7 +109,7 @@ class PubMedFetchTests(TestCase):
         self.ids = (21813367, )
         self.fetch = pubmed.PubMedFetch(id_list=self.ids)
         self.fetch.get_content()
-        abstract_text = u"""<span class="abstract_label">BACKGROUND: </span>People living or working in eastern Ohio and western West Virginia have been exposed to perfluorooctanoic acid (PFOA) released by DuPont Washington Works facilities.<br><span class="abstract_label">OBJECTIVES: </span>Our objective was to estimate historical PFOA exposures and serum concentrations experienced by 45,276 non-occupationally exposed participants in the C8 Health Project who consented to share their residential histories and a 2005-2006 serum PFOA measurement.<br><span class="abstract_label">METHODS: </span>We estimated annual PFOA exposure rates for each individual based on predicted calibrated water concentrations and predicted air concentrations using an environmental fate and transport model, individual residential histories, and maps of public water supply networks. We coupled individual exposure estimates with a one-compartment absorption, distribution, metabolism, and excretion (ADME) model to estimate time-dependent serum concentrations.<br><span class="abstract_label">RESULTS: </span>For all participants (n = 45,276), predicted and observed median serum concentrations in 2005-2006 are 14.2 and 24.3 ppb, respectively [Spearman's rank correlation coefficient (r(s)) = 0.67]. For participants who provided daily public well water consumption rate and who had the same residence and workplace in one of six municipal water districts for 5 years before the serum sample (n = 1,074), predicted and observed median serum concentrations in 2005-2006 are 32.2 and 40.0 ppb, respectively (r(s) = 0.82).<br><span class="abstract_label">CONCLUSIONS: </span>Serum PFOA concentrations predicted by linked exposure and ADME models correlated well with observed 2005-2006 human serum concentrations for C8 Health Project participants. These individualized retrospective exposure and serum estimates are being used in a variety of epidemiologic studies being conducted in this region."""  # NOQA
+        abstract_text = """<span class="abstract_label">BACKGROUND: </span>People living or working in eastern Ohio and western West Virginia have been exposed to perfluorooctanoic acid (PFOA) released by DuPont Washington Works facilities.<br><span class="abstract_label">OBJECTIVES: </span>Our objective was to estimate historical PFOA exposures and serum concentrations experienced by 45,276 non-occupationally exposed participants in the C8 Health Project who consented to share their residential histories and a 2005-2006 serum PFOA measurement.<br><span class="abstract_label">METHODS: </span>We estimated annual PFOA exposure rates for each individual based on predicted calibrated water concentrations and predicted air concentrations using an environmental fate and transport model, individual residential histories, and maps of public water supply networks. We coupled individual exposure estimates with a one-compartment absorption, distribution, metabolism, and excretion (ADME) model to estimate time-dependent serum concentrations.<br><span class="abstract_label">RESULTS: </span>For all participants (n = 45,276), predicted and observed median serum concentrations in 2005-2006 are 14.2 and 24.3 ppb, respectively [Spearman's rank correlation coefficient (r(s)) = 0.67]. For participants who provided daily public well water consumption rate and who had the same residence and workplace in one of six municipal water districts for 5 years before the serum sample (n = 1,074), predicted and observed median serum concentrations in 2005-2006 are 32.2 and 40.0 ppb, respectively (r(s) = 0.82).<br><span class="abstract_label">CONCLUSIONS: </span>Serum PFOA concentrations predicted by linked exposure and ADME models correlated well with observed 2005-2006 human serum concentrations for C8 Health Project participants. These individualized retrospective exposure and serum estimates are being used in a variety of epidemiologic studies being conducted in this region."""  # NOQA
         self.maxDiff = None
         self.assertEqual(self.fetch.content[0]['abstract'], abstract_text)
 
@@ -122,7 +122,7 @@ class PubMedFetchTests(TestCase):
         self.ids = (21813142, )
         self.fetch = pubmed.PubMedFetch(id_list=self.ids)
         self.fetch.get_content()
-        doi = u"10.1016/j.medcli.2011.05.017"
+        doi = "10.1016/j.medcli.2011.05.017"
         self.assertEqual(self.fetch.content[0]['doi'], doi)
 
     def test_book(self):
@@ -133,12 +133,12 @@ class PubMedFetchTests(TestCase):
         obj.pop('xml')
         obj.pop('abstract')
         expected = {
-            'authors_short': u'Committee on Predictive-Toxicology Approaches for Military Assessments of Acute Exposures et al.',
+            'authors_short': 'Committee on Predictive-Toxicology Approaches for Military Assessments of Acute Exposures et al.',
             'doi': '10.17226/21775',
             'year': 2015,
             'PMID': '26468569',
             'title': 'Application of Modern Toxicology Approaches for Predicting Acute Toxicity for Chemical Defense',
-            'citation': u'(2015). Washington (DC): National Academies Press (US).',
+            'citation': '(2015). Washington (DC): National Academies Press (US).',
             'authors_list': [
                 'Committee on Predictive-Toxicology Approaches for Military Assessments of Acute Exposures',
                 'Committee on Toxicology',
@@ -160,11 +160,11 @@ class PubMedFetchTests(TestCase):
         expected = {
             'PMID': '20301382',
             'authors_list': [
-                u'DiMauro S',
-                u'Hirano M'
+                'DiMauro S',
+                'Hirano M'
             ],
-            'authors_short': u'DiMauro S and Hirano M',
-            'citation': u'GeneReviews(®) (1993). Seattle (WA): University of Washington, Seattle.',
+            'authors_short': 'DiMauro S and Hirano M',
+            'citation': 'GeneReviews(®) (1993). Seattle (WA): University of Washington, Seattle.',
             'doi': None,
             'title': 'Mitochondrial DNA Deletion Syndromes',
             'year': 1993

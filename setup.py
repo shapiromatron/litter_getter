@@ -20,8 +20,7 @@ def get_version():
 
 requirements = [
     'requests',
-    'RISparser>=0.4.1',
-    'XlsxWriter>=0.7.3',
+    'XlsxWriter',
 ]
 
 test_requirements = [
@@ -42,6 +41,7 @@ setup(
     package_dir={'litter_getter': 'litter_getter'},
     include_package_data=True,
     install_requires=requirements,
+    dependency_links=['http://github.com/JoshAddington/RISparser@071989f43892c0bafe3badd47f7d5f3b1a826cc8'],
     license="MIT license",
     zip_safe=False,
     keywords='litter_getter',
@@ -50,8 +50,8 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7',
+        "Programming Language :: Python :: 3",
+        'Programming Language :: Python :: 3.5',
     ],
     test_suite='tests',
     tests_require=test_requirements

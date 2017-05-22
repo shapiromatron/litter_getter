@@ -56,7 +56,7 @@ class PubMedSearch(PubMedUtility):
         self.settings = PubMedSearch.default_settings.copy()
         self._register_instance()
         self.settings['term'] = term
-        for k, v in kwargs.iteritems():
+        for k, v in kwargs.items():
             self.settings[k] = v
 
     def _get_id_count(self):
@@ -80,12 +80,12 @@ class PubMedSearch(PubMedUtility):
 
         id_list = ET.fromstring(txt).find('IdList')
         ids = id_list.findall('Id')
-        return map(parse_id, ids)
+        return list(map(parse_id, ids))
 
     def _fetch_ids(self):
         ids = []
         data = self.settings.copy()
-        rng = range(0, self.id_count, self.settings['retmax'])
+        rng = list(range(0, self.id_count, self.settings['retmax']))
         self.request_count = len(rng)
         for retstart in rng:
             data['retstart'] = retstart
@@ -137,12 +137,12 @@ class PubMedFetch(PubMedUtility):
         self.content = []
         self.settings = PubMedFetch.default_settings.copy()
         self._register_instance()
-        for k, v in kwargs.iteritems():
+        for k, v in kwargs.items():
             self.settings[k] = v
 
     def get_content(self):
         data = self.settings.copy()
-        rng = range(0, len(self.ids), self.settings['retmax'])
+        rng = list(range(0, len(self.ids), self.settings['retmax']))
         self.request_count = len(rng)
         for retstart in rng:
             data['id'] = self.ids[retstart: retstart + self.settings['retmax']]
@@ -155,8 +155,8 @@ class PubMedFetch(PubMedUtility):
                 for book in books:
                     self.content.append(self._parse_book(book))
             else:
-                logging.error(u'Pubmed failure: {}, content: {}'.format(r.status_code, r.text))
-                logging.error(u'Pubmed failure data submission: {}'.format(data))
+                logging.error('Pubmed failure: {}, content: {}'.format(r.status_code, r.text))
+                logging.error('Pubmed failure data submission: {}'.format(data))
                 raise Exception('Fetch query failed; please reformat query or try again later')
         return self.content
 
@@ -216,12 +216,12 @@ class PubMedFetch(PubMedUtility):
         if len(abstracts) > 1:
             txts = []
             for abstract in abstracts:
-                tmp = abstract.text or u''
+                tmp = abstract.text or ''
                 lbl = abstract.attrib.get('Label')
                 if lbl:
-                    tmp = u'<span class="abstract_label">{v}: </span>'.format(v=lbl) + tmp
+                    tmp = '<span class="abstract_label">{v}: </span>'.format(v=lbl) + tmp
                 txts.append(tmp)
-            txt = u'<br>'.join(txts)
+            txt = '<br>'.join(txts)
         return txt
 
     @classmethod
@@ -244,7 +244,7 @@ class PubMedFetch(PubMedUtility):
 
         for auth in auths:
             try:
-                names.append(u'{0} {1}'.format(
+                names.append('{0} {1}'.format(
                     auth.find('LastName').text,
                     auth.find('Initials').text))
             except:
@@ -261,7 +261,7 @@ class PubMedFetch(PubMedUtility):
         }
 
     def _journal_info(self, article):
-        return u'{journal} {year}; {volume} ({issue}):{pages}'.format(
+        return '{journal} {year}; {volume} ({issue}):{pages}'.format(
             journal=PubMedFetch._try_single_find(
                 article,
                 'MedlineCitation/Article/Journal/ISOAbbreviation'),
@@ -285,7 +285,7 @@ class PubMedFetch(PubMedUtility):
         else:
             title = ''
 
-        return u'{title}({year}). {location}: {publisher}.'.format(
+        return '{title}({year}). {location}: {publisher}.'.format(
             title=title,
             year=PubMedFetch._try_single_find(
                 et,

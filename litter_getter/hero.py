@@ -51,13 +51,13 @@ class HEROFetch(object):
         self.content = []
         self.failures = []
         self.settings = HEROFetch.default_settings.copy()
-        for k, v in kwargs.iteritems():
+        for k, v in kwargs.items():
             self.settings[k] = v
 
     def get_content(self):
-        rng = range(0, self.ids_count, self.settings['recordsperpage'])
+        rng = list(range(0, self.ids_count, self.settings['recordsperpage']))
         for recstart in rng:
-            pks = u','.join([
+            pks = ','.join([
                 str(pk) for pk in
                 self.ids[recstart:recstart + self.settings['recordsperpage']]
             ])
@@ -98,7 +98,7 @@ class HEROFetch(object):
     def _parse_pseudo_json(self, d, field):
         # built-in json parser doesn't identify nulls in HERO returns
         v = d.get(field, None)
-        if v == u'null':
+        if v == 'null':
             return None
         else:
             return v
