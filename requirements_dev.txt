@@ -5,6 +5,8 @@ flake8==2.6.0
 tox==2.3.1
 coverage==4.1
 Sphinx==1.4.4
+requests==2.14.2
+XlsxWriter
 
 pytest==2.9.2
 git+git://github.com/JoshAddington/RISparser@071989f43892c0bafe3badd47f7d5f3b1a826cc8
