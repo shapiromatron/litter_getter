@@ -41,7 +41,7 @@ setup(
     package_dir={'litter_getter': 'litter_getter'},
     include_package_data=True,
     install_requires=requirements,
-    dependency_links=['http://github.com/JoshAddington/RISparser@071989f43892c0bafe3badd47f7d5f3b1a826cc8'],
+    dependency_links=['git+git://github.com/MrTango/RISparser@bbb89c601bfd66df9907fd91933cd43a95d72a87'],
     license="MIT license",
     zip_safe=False,
     keywords='litter_getter',
