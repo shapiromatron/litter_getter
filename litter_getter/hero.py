@@ -105,7 +105,7 @@ class HEROFetch(object):
 
     def _parse_article(self, article):
         d = dict(
-            json=json.dumps(article, encoding='utf-8'),
+            json=json.dumps(article),
             HEROID=str(self._parse_pseudo_json(article, 'REFERENCE_ID')),
             PMID=str(self._parse_pseudo_json(article, 'PMID')),
             title=self._parse_pseudo_json(article, 'TITLE'),

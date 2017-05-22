@@ -164,7 +164,7 @@ class PubMedFetch(PubMedUtility):
         pmid = str(PubMedFetch._try_single_find(article, 'MedlineCitation/PMID'))
         logging.debug('Parsing results for PMID: {pmid}'.format(pmid=pmid))
         d = {
-            'xml': ET.tostring(article, encoding='utf-8'),
+            'xml': ET.tostring(article),
             'PMID': pmid,
             'title': PubMedFetch._try_single_find(article, 'MedlineCitation/Article/ArticleTitle'),
             'abstract': self._get_abstract(article, self.ABSTRACT_ARTICLE_SEARCH_STRING),
@@ -178,7 +178,7 @@ class PubMedFetch(PubMedUtility):
     def _parse_book(self, book):
         pmid = str(PubMedFetch._try_single_find(book, 'BookDocument/PMID'))
         logging.debug('Parsing results for PMID: {pmid}'.format(pmid=pmid))
-        xml = ET.tostring(book, encoding='utf-8')
+        xml = ET.tostring(book)
         book_title = PubMedFetch._try_single_find(book, 'BookDocument/Book/BookTitle')
         article_title = self._try_single_find(book, 'BookDocument/ArticleTitle')
         abstract = self._get_abstract(book, self.ABSTRACT_BOOK_SEARCH_STRING)

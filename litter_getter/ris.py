@@ -74,7 +74,7 @@ class RisImporter(object):
         for r, row in enumerate(data_rows):
             for c, txt in enumerate(row):
                 try:
-                    ws.write(r + 1, c, txt.decode('utf8'))
+                    ws.write(r + 1, c, txt)
                 except AttributeError:
                     ws.write(r + 1, c, txt)
 
@@ -193,7 +193,7 @@ class ReferenceParser(object):
                 for author in self.content[fld]:
                     if isinstance(author, str):
                         # make sure we're dealing w/ unicode
-                        txt = str(author.decode('utf-8'))
+                        txt = str(author)
                     m = self.re_author.match(txt)
                     if m:
                         initials = re.sub(r'[\s\.]', '', m.group(2))
@@ -215,14 +215,14 @@ class ReferenceParser(object):
         # issue is sometimes blank; only add parens if non-blank
         issue = str(self.content.get('note', ''))
         if len(issue) > 0:
-            issue = ' ({0})'.format(issue.decode('utf-8'))
+            issue = ' ({0})'.format(issue)
 
         # pages is sometimes blank; only add colon if non-blank
         pages = str(self.content.get('start_page', ''))
         if len(pages) > 0:
-            pages = ':{0}'.format(pages.decode('utf-8'))
+            pages = ':{0}'.format(pages)
 
-        sec_title = str(self.content.get('secondary_title', '').decode('utf-8'))  # journal
+        sec_title = str(self.content.get('secondary_title', ''))  # journal
         year = self.content.get('year', '')  # year
         return '{0} {1}{2}{3}{4}'.format(*(
             sec_title, year, volume, issue, pages
@@ -231,7 +231,7 @@ class ReferenceParser(object):
     def _get_book_citation(self):
         vals = []
         if 'secondary_title' in self.content:
-            vals.append('{0}.'.format(self.content['secondary_title'].decode('utf-8')))
+            vals.append('{0}.'.format(self.content['secondary_title']))
         if 'year' in self.content:
             vals.append('{0}.'.format(self.content['year']))
         if 'start_page' in self.content:
