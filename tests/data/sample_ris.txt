@@ -300,6 +300,8 @@ TI  - An exploratory study of methicillin-resistant Staphylococcus aureus and SC
 UR  - http://www.scopus.com/inward/record.url?eid=2-s2.0-77953084872&partnerID=40&md5=713db175ca4c2d5d5c67135685725717
 VL  - 60
 ID  - 160
+JP  - CRISPR
+DC  - Direct Current
 ER  - 
 
 

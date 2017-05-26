@@ -78,3 +78,19 @@ class RISParsingTests(ExtendedTestCase):
         # test unicode-authors
         test = "Radomska-Leśniewska DM and Skopiński P"
         self.assertEqual(test, refs[8]['authors_short'])
+
+    def test_parsing_unknown_tags(self):
+        # make sure file exists
+        fn = os.path.join(os.path.dirname(__file__), "data/sample_ris.txt")
+
+        importer = RisImporter(fn)
+        refs = importer.references
+
+        # test import with unknown tags
+        test = '''{
+            "JP": ["CRISPR"],
+            "DC": ["Direct Current"]
+        }'''
+        ref = refs[4]
+        ref_json = json.loads(ref.pop('json'))
+        self.assertJSONEqual(json.dumps(ref_json['unknown_tag']), test)

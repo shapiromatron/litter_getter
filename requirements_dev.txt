@@ -9,4 +9,4 @@ requests==2.14.2
 XlsxWriter
 
 pytest==2.9.2
-git+git://github.com/MrTango/RISparser@bbb89c601bfd66df9907fd91933cd43a95d72a87
+git+git://github.com/MrTango/RISparser@157c06584cc7e19ad95c6ae41186e6076904b415
