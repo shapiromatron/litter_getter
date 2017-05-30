@@ -2,6 +2,12 @@
 History
 =======
 
+0.2.1 (2017-05-30)
+------------------
+
+* Return unicode XML instead of bytes in dict
+
+
 0.2.0 (2017-05-29)
 ------------------
 
