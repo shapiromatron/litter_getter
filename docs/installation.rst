@@ -37,8 +37,7 @@ Once you have a copy of the source, install with:
 .. code-block:: console
 
     cd litter_getter/
-    pip install -e .
-    pip install -r requirements_dev.txt
+    pip install -e .[dev,test]
     make test
 
 .. _`Github repository`: https://github.com/shapiromatron/litter_getter

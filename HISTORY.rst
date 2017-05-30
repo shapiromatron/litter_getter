@@ -2,10 +2,10 @@
 History
 =======
 
-0.2.0 (2017-05-17)
+0.2.0 (2017-05-29)
 ------------------
 
-* Added Python 3 compatibility
+* Upgraded to Python 3 only
 
 
 0.1.2 (2017-04-07)
