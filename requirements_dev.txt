@@ -5,5 +5,8 @@ flake8==2.6.0
 tox==2.3.1
 coverage==4.1
 Sphinx==1.4.4
+requests==2.14.2
+XlsxWriter
 
 pytest==2.9.2
+git+git://github.com/MrTango/RISparser@157c06584cc7e19ad95c6ae41186e6076904b415

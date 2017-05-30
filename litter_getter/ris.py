@@ -36,7 +36,7 @@ class RisImporter(object):
             return False
 
     def __init__(self, f):
-        if isinstance(f, basestring):
+        if isinstance(f, str):
             f = open(f, 'r')
         else:
             f = f
@@ -74,7 +74,7 @@ class RisImporter(object):
         for r, row in enumerate(data_rows):
             for c, txt in enumerate(row):
                 try:
-                    ws.write(r + 1, c, txt.decode('utf8'))
+                    ws.write(r + 1, c, txt)
                 except AttributeError:
                     ws.write(r + 1, c, txt)
 
@@ -178,7 +178,7 @@ class ReferenceParser(object):
         number = self.content.get('accession_number', None)
 
         # extract the Scopus EID
-        if number and isinstance(number, basestring) and 'eid=' in number:
+        if number and isinstance(number, str) and 'eid=' in number:
             m = self.re_scopus_eid.findall(number)
             if len(m) > 0:
                 number = m[0]
@@ -193,12 +193,12 @@ class ReferenceParser(object):
                 for author in self.content[fld]:
                     if isinstance(author, str):
                         # make sure we're dealing w/ unicode
-                        txt = unicode(author.decode('utf-8'))
+                        txt = str(author)
                     m = self.re_author.match(txt)
                     if m:
                         initials = re.sub(r'[\s\.]', '', m.group(2))
                         surname = m.group(1).replace(',', '')
-                        txt = u'{0} {1}'.format(surname, initials)
+                        txt = '{0} {1}'.format(surname, initials)
                     self._authors.append(txt)
 
     def _get_authors_short(self):
@@ -210,35 +210,35 @@ class ReferenceParser(object):
         # volume is sometimes blank; only add parens if non-blank
         volume = str(self.content.get('volume', ''))
         if len(volume) > 0:
-            volume = u'; {0}'.format(volume)
+            volume = '; {0}'.format(volume)
 
         # issue is sometimes blank; only add parens if non-blank
         issue = str(self.content.get('note', ''))
         if len(issue) > 0:
-            issue = u' ({0})'.format(issue.decode('utf-8'))
+            issue = ' ({0})'.format(issue)
 
         # pages is sometimes blank; only add colon if non-blank
         pages = str(self.content.get('start_page', ''))
         if len(pages) > 0:
-            pages = u':{0}'.format(pages.decode('utf-8'))
+            pages = ':{0}'.format(pages)
 
-        sec_title = unicode(self.content.get('secondary_title', '').decode('utf-8'))  # journal
+        sec_title = str(self.content.get('secondary_title', ''))  # journal
         year = self.content.get('year', '')  # year
-        return u'{0} {1}{2}{3}{4}'.format(*(
+        return '{0} {1}{2}{3}{4}'.format(*(
             sec_title, year, volume, issue, pages
         ))
 
     def _get_book_citation(self):
         vals = []
         if 'secondary_title' in self.content:
-            vals.append(u'{0}.'.format(self.content['secondary_title'].decode('utf-8')))
+            vals.append('{0}.'.format(self.content['secondary_title']))
         if 'year' in self.content:
-            vals.append(u'{0}.'.format(self.content['year']))
+            vals.append('{0}.'.format(self.content['year']))
         if 'start_page' in self.content:
-            vals.append(u'Pages {0}.'.format(self.content['start_page']))
+            vals.append('Pages {0}.'.format(self.content['start_page']))
         if 'issn' in self.content:
-            vals.append(u'{0}'.format(self.content['issn']))
-        return u' '.join(vals)
+            vals.append('{0}'.format(self.content['issn']))
+        return ' '.join(vals)
 
     def _get_citation(self):
         refType = self.content.get('type_of_reference', '')
