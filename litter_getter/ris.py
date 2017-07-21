@@ -32,7 +32,8 @@ class RisImporter(object):
             [content for content in reader]
             f.seek(0)
             return True
-        except IOError:
+        except IOError as err:
+            logging.warning(err)
             return False
 
     def __init__(self, f):
