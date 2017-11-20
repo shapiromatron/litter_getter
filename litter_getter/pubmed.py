@@ -53,6 +53,7 @@ class PubMedSearch(PubMedUtility):
     )
 
     def __init__(self, term, **kwargs):
+        self.id_count = None
         self.settings = PubMedSearch.default_settings.copy()
         self._register_instance()
         self.settings['term'] = term
@@ -85,6 +86,8 @@ class PubMedSearch(PubMedUtility):
     def _fetch_ids(self):
         ids = []
         data = self.settings.copy()
+        if self.id_count is None:
+            self._get_id_count()
         rng = list(range(0, self.id_count, self.settings['retmax']))
         self.request_count = len(rng)
         for retstart in rng:
