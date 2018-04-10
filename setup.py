@@ -21,7 +21,7 @@ def get_version():
 requirements = [
     'requests',
     'XlsxWriter',
-    'RISparser>=0.4.2',
+    'RISparser>=0.4.3',
 ]
 
 test_requirements = [

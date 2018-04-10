@@ -164,7 +164,7 @@ class PubMedFetchTests(TestCase):
                 'Hirano M'
             ],
             'authors_short': 'DiMauro S and Hirano M',
-            'citation': 'GeneReviews(®) (1993). Seattle (WA): University of Washington, Seattle.',
+            'citation': 'GeneReviews (1993). Seattle (WA): University of Washington, Seattle.',
             'doi': None,
             'title': 'Mitochondrial DNA Deletion Syndromes',
             'year': 1993

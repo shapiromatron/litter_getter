@@ -2,6 +2,13 @@
 History
 =======
 
+0.2.2 (2018-04-10)
+------------------
+
+* Bump RISparser version
+* Prevent error if fetch called before count (@breisfeld)
+
+
 0.2.1 (2017-05-30)
 ------------------
 
