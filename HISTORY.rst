@@ -2,6 +2,12 @@
 History
 =======
 
+0.2.3 (2018-04-25)
+------------------
+
+* Fix bug in capturing abstract text with child elements
+
+
 0.2.2 (2018-04-10)
 ------------------
 

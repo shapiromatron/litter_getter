@@ -212,13 +212,13 @@ class PubMedFetch(PubMedUtility):
 
         # standard abstract
         if len(abstracts) == 1:
-            txt = abstracts[0].text
+            txt = ''.join([txt for txt in abstracts[0].itertext()])
 
         # structured abstract
         if len(abstracts) > 1:
             txts = []
             for abstract in abstracts:
-                tmp = abstract.text or ''
+                tmp = ''.join([txt for txt in abstract.itertext()])
                 lbl = abstract.attrib.get('Label')
                 if lbl:
                     tmp = '<span class="abstract_label">{v}: </span>'.format(v=lbl) + tmp

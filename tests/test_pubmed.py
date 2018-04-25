@@ -113,6 +113,19 @@ class PubMedFetchTests(TestCase):
         self.maxDiff = None
         self.assertEqual(self.fetch.content[0]['abstract'], abstract_text)
 
+    def test_abstract_with_child_text(self):
+        """
+        Ensure abstracts w/ html spans like <i></i> can be captured.
+
+        Example: https://www.ncbi.nlm.nih.gov/pubmed/29186030
+        """
+        self.ids = (29186030, )
+        self.fetch = pubmed.PubMedFetch(id_list=self.ids)
+        self.fetch.get_content()
+        abstract_text = """CYP353D1v2 is a cytochrome P450 related to imidacloprid resistance in Laodelphax striatellus. This work was conducted to examine the ability of CYP353D1v2 to metabolize other insecticides. Carbon monoxide difference spectra analysis indicates that CYP353D1v2 was successfully expressed in insect cell Sf9. The catalytic activity of CYP353D1v2 relating to degrading buprofezin, chlorpyrifos, and deltamethrin was tested by measuring substrate depletion and analyzing the formation of metabolites. The results showed the nicotinamide-adenine dinucleotide phosphate (NADPH)-dependent depletion of buprofezin (eluting at 8.7 min) and parallel formation of an unknown metabolite (eluting 9.5 min). However, CYP353D1v2 is unable to metabolize deltamethrin and chlorpyrifos. The recombinant CYP353D1v2 protein efficiently catalyzed the model substrate p-nitroanisole with a maximum velocity of 9.24 nmol/min/mg of protein and a Michaelis constant of Km = 6.21 µM. In addition, imidacloprid was metabolized in vitro by the recombinant CYP353D1v2 microsomes (catalytic constant Kcat) 0.064 pmol/min/pmol P450, Km = 6.41 µM. The mass spectrum of UPLC-MS analysis shows that the metabolite was a product of buprofezin, which was buprofezin sulfone. This result provided direct evidence that L. striatellus cytochrome P450 CYP353D1v2 is capable of metabolizing imidacloprid and buprofezin."""  # NOQA
+        self.maxDiff = None
+        self.assertEqual(self.fetch.content[0]['abstract'], abstract_text)
+
     def test_doi(self):
         """
         Ensure DOI is obtained.
