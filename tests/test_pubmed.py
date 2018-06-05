@@ -126,6 +126,13 @@ class PubMedFetchTests(TestCase):
         self.maxDiff = None
         self.assertEqual(self.fetch.content[0]['abstract'], abstract_text)
 
+    def test_title_with_child_text(self):
+        self.ids = (27933116, )
+        self.fetch = pubmed.PubMedFetch(id_list=self.ids)
+        self.fetch.get_content()
+        title = 'Phoenix dactylifera mediated green synthesis of Cu2O particles for arsenite uptake from water.'
+        self.assertEqual(self.fetch.content[0]['title'], title)
+
     def test_doi(self):
         """
         Ensure DOI is obtained.
@@ -177,7 +184,7 @@ class PubMedFetchTests(TestCase):
                 'Hirano M'
             ],
             'authors_short': 'DiMauro S and Hirano M',
-            'citation': 'GeneReviews (1993). Seattle (WA): University of Washington, Seattle.',
+            'citation': 'GeneReviews® (1993). Seattle (WA): University of Washington, Seattle.',
             'doi': None,
             'title': 'Mitochondrial DNA Deletion Syndromes',
             'year': 1993

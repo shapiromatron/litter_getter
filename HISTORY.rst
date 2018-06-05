@@ -2,6 +2,12 @@
 History
 =======
 
+0.2.4 (2018-06-05)
+------------------
+
+* Fix bug in capturing title text with child elements
+
+
 0.2.3 (2018-04-25)
 ------------------
 

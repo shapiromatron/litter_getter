@@ -229,7 +229,8 @@ class PubMedFetch(PubMedUtility):
     @classmethod
     def _try_single_find(cls, xml, search):
         try:
-            return xml.find(search).text
+            match = xml.find(search)
+            return ''.join([txt for txt in match.itertext()])
         except:
             return ''
 
