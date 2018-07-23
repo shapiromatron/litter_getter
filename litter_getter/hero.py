@@ -14,19 +14,19 @@ GET http://hero.epa.gov/ws/index.cfm/api/1.0/search/heroid/1203
 All query fields are passed as name/value pairs in the URL. For example:
 
 JSON
-http://hero.epa.gov/ws/index.cfm/api/1.0/search/criteria/mercury.json
-http://hero.epa.gov/ws/index.cfm/api/1.0/search/singleyear/1990/any/inhalation
+https://hero.epa.gov/hero/ws/index.cfm/api/1.0/search/criteria/mercury.json
+https://hero.epa.gov/hero/ws/index.cfm/api/1.0/search/singleyear/1990/any/inhalation
 
 XML
-http://hero.epa.gov/ws/index.cfm/api/1.0/search/criteria/mercury.xml
-http://hero.epa.gov/ws/index.cfm/api/1.0/search/singleyear/1990/any/inhalation%20reference.xml
-http://hero.epa.gov/ws/index.cfm/api/1.0/search/singleyear/1990/any/inhalation%20reference/recordsperpage/5.xml
+https://hero.epa.gov/hero/ws/index.cfm/api/1.0/search/criteria/mercury.xml
+https://hero.epa.gov/hero/ws/index.cfm/api/1.0/search/singleyear/1990/any/inhalation%20reference.xml
+https://hero.epa.gov/hero/ws/index.cfm/api/1.0/search/singleyear/1990/any/inhalation%20reference/recordsperpage/5.xml
 
 RIS
-http://hero.epa.gov/ws/index.cfm/api/1.0/search/criteria/mercury.ris
+https://hero.epa.gov/hero/ws/index.cfm/api/1.0/search/criteria/mercury.ris
 
 Getting multiple HERO ids (records per page required)
-http://hero.epa.gov/ws/index.cfm/api/1.0/search/criteria/1200,1201,1203,1204/recordsperpage/500.xml
+https://hero.epa.gov/hero/ws/index.cfm/api/1.0/search/criteria/1200,1201,1203,1204/recordsperpage/500.xml
 
 """
 
@@ -40,7 +40,7 @@ class HEROFetch(object):
     includes the PubMed ID, if available in HERO.
     """
 
-    base_url = r'http://hero.epa.gov/ws/index.cfm/api/1.0/search/criteria/{pks}/recordsperpage/{rpp}.json'  # noqa
+    base_url = r'https://hero.epa.gov/hero/ws/index.cfm/api/1.0/search/criteria/{pks}/recordsperpage/{rpp}.json'  # noqa
     default_settings = {'recordsperpage': 100}
 
     def __init__(self, id_list, **kwargs):
