@@ -40,9 +40,9 @@ class HEROFetchTests(TestCase):
         ids = [str(d) for d in range(1200, 1405)]
         hero_getter = HEROFetch(id_list=ids)
         hero_getter.get_content()
-        self.assertEqual(len(hero_getter.content), 197)
-        self.assertEqual(len(hero_getter.failures), 8)
+        self.assertEqual(len(hero_getter.content), 200)
+        self.assertEqual(len(hero_getter.failures), 5)
         self.assertListEqual(
             sorted(hero_getter.failures),
-            sorted(['1227', '1349', '1224', '1303', '1205',
-                    '1228', '1373', '1361']))
+            sorted(['1227', '1349', '1224',
+                    '1228', '1361']))
