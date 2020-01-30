@@ -21,6 +21,7 @@ setup(
     version=get_version(),
     description="Retrieve literature from biomedical reference libraries such as PubMed, EPA's HERO, and imports from Endnote RIS exports",
     long_description=readme + "\n\n" + history,
+    long_description_content_type="text/markdown",
     author="Andy Shapiro",
     author_email="shapiromatron@gmail.com",
     url="https://github.com/shapiromatron/litter_getter",

@@ -1,6 +1,6 @@
 # Literature Getter (litter_getter)
 
-![https://pypi.python.org/pypi/litter_getter](https://img.shields.io/pypi/v/litter_getter.svg)
+![PyPI](https://img.shields.io/pypi/v/litter_getter)
 
 Retrieve literature from biomedical reference libraries such as PubMed, EPA's HERO, and imports from Endnote RIS exports.
 
