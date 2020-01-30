@@ -4,7 +4,7 @@ from pathlib import Path
 from setuptools import setup
 
 readme = Path("README.md").read_text()
-history = Path("HISTORY.rst").read_text()
+history = Path("HISTORY.md").read_text()
 
 
 def get_version():
