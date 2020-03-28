@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-import json
 import logging
 import re
 from copy import copy
+from typing import Optional
 
 import xlsxwriter
 from RISparser import readris
@@ -100,25 +99,16 @@ class ReferenceParser:
         "subsidiary_authors",
     )
 
-    ABSTRACT_FIELDS = (
-        "abstract",
-        "abstract2",
-    )
+    ABSTRACT_FIELDS = ("abstract", "abstract2")
 
-    YEAR_FIELDS = (
-        "year",
-        "publication_year",
-    )
-
-    # First-group is rest of reference; second-group are initials
-    # with optional second initial (middle-name) with optional periods
-    re_author = re.compile(r"([\-\,\s\w]+)\s([\s?\w{1,1}\.?]+)$", flags=re.UNICODE)
+    YEAR_FIELDS = ("year", "publication_year")
 
     # Extract the scopus EID
     re_scopus_eid = re.compile(r"eid=([-\.\w]+)(?:&|$)", flags=re.UNICODE)
 
     EXTRACTED_FIELDS = [
         "authors_short",
+        "authors",
         "title",
         "year",
         "citation",
@@ -142,6 +132,7 @@ class ReferenceParser:
         if not hasattr(self, "_formatted"):
             self._formatted = dict(
                 authors_short=self._get_authors_short(),
+                authors=self._authors,
                 title=self._get_field(self.TITLE_FIELDS, self.PLACEHOLDER_TEXT),
                 year=self._get_field(self.YEAR_FIELDS, None),
                 citation=self._get_citation(),
@@ -152,7 +143,7 @@ class ReferenceParser:
                 accession_db=self.content.get("name_of_database", None),
                 reference_type=self.content.get("type_of_reference", None),
                 id=utils.try_int(self.content["id"]),
-                json=json.dumps(self.content),
+                json=self.content,
             )
         return self._formatted
 
@@ -162,17 +153,17 @@ class ReferenceParser:
                 return self.content.get(fld)
         return default
 
-    def _get_pmid(self):
+    def _get_pmid(self) -> Optional[int]:
         # get PMID if specified in that field
         if "pubmed_id" in self.content:
             pubmed_id = self.content["pubmed_id"]
             if type(pubmed_id) is int:
-                return str(pubmed_id)
+                return pubmed_id
             else:
                 m = self.re_pmid.findall(pubmed_id)
                 if len(m) > 0:
                     # no try/catch req'd; return first matching int
-                    return str(m[0])
+                    return int(m[0])
 
         # get value accession number is NLM
         if self.content.get("name_of_database", "") == "NLM" and "accession_number" in self.content:
@@ -195,20 +186,11 @@ class ReferenceParser:
         return number
 
     def _clean_authors(self):
-        self._authors = []
+        authors = []
         for fld in self.AUTHOR_LIST_FIELDS:
             if fld in self.content:
-                # attempt changing "Smith D. L." to "Smith DL"
-                for author in self.content[fld]:
-                    if isinstance(author, str):
-                        # make sure we're dealing w/ unicode
-                        txt = str(author)
-                    m = self.re_author.match(txt)
-                    if m:
-                        initials = re.sub(r"[\s\.]", "", m.group(2))
-                        surname = m.group(1).replace(",", "")
-                        txt = "{0} {1}".format(surname, initials)
-                    self._authors.append(txt)
+                authors.extend([author for author in self.content[fld]])
+        self._authors = utils.normalize_authors(authors)
 
     def _get_authors_short(self):
         if not hasattr(self, "_authors"):
@@ -219,38 +201,38 @@ class ReferenceParser:
         # volume is sometimes blank; only add parens if non-blank
         volume = str(self.content.get("volume", ""))
         if len(volume) > 0:
-            volume = "; {0}".format(volume)
+            volume = f"; {volume}"
 
         # issue is sometimes blank; only add parens if non-blank
         issue = str(self.content.get("note", ""))
         if len(issue) > 0:
-            issue = " ({0})".format(issue)
+            issue = f" ({issue})"
 
         # pages is sometimes blank; only add colon if non-blank
         pages = str(self.content.get("start_page", ""))
         if len(pages) > 0:
-            pages = ":{0}".format(pages)
+            pages = f":{pages}"
 
         sec_title = str(self.content.get("secondary_title", ""))  # journal
         year = self.content.get("year", "")  # year
-        return "{0} {1}{2}{3}{4}".format(*(sec_title, year, volume, issue, pages))
+        return f"{sec_title} {year}{volume}{issue}{pages}"
 
     def _get_book_citation(self):
         vals = []
         if "secondary_title" in self.content:
-            vals.append("{0}.".format(self.content["secondary_title"]))
+            vals.append(f"{self.content['secondary_title']}.")
         if "year" in self.content:
-            vals.append("{0}.".format(self.content["year"]))
+            vals.append(f"{self.content['year']}.")
         if "start_page" in self.content:
-            vals.append("Pages {0}.".format(self.content["start_page"]))
+            vals.append(f"Pages {self.content['start_page']}.")
         if "issn" in self.content:
-            vals.append("{0}".format(self.content["issn"]))
+            vals.append(f"{self.content['issn']}")
         return " ".join(vals)
 
     def _get_citation(self):
         refType = self.content.get("type_of_reference", "")
         citation = self.PLACEHOLDER_TEXT
-        if refType in ("JFULL", "JOUR",):
+        if refType in ("JFULL", "JOUR"):
             citation = self._get_journal_citation()
         elif refType in ("BOOK", "CHAP"):
             citation = self._get_book_citation()
@@ -260,5 +242,5 @@ class ReferenceParser:
             citation = self.content.get("short_title", "")
         else:
             id_ = self.content.get("id", None)
-            logging.warning('Unknown type: "{}", id="{}"'.format(refType, id_))
+            logging.warning(f'Unknown type: "{refType}", id="{id_}"')
         return citation
