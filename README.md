@@ -8,6 +8,11 @@ Retrieve literature from biomedical reference libraries such as PubMed, EPA's HE
 * Search and reference parsing using [US EPA HERO](https://hero.epa.gov/hero/)
 * Endnote/Reference Manager RIS file-export parsing
 
+**Update (September 2020):** we've moved this project back into it's parent project, [HAWC](https://github.com/shapiromatron/hawc),
+to make it easier to change without minting new releases, as we were not aware of lots of use outside
+HAWC. Most of the code has been moved to the [services](https://github.com/shapiromatron/hawc/tree/master/hawc/services)
+path if you'd like to use the latest.
+
 ## Installation
 
 Install with pip:
